@@ -1,0 +1,20 @@
+
+.meme-editor-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.meme-editor-page main {
+    display: flex;
+}
+
+
+.meme-editor-canvas {
+    border: 2px solid white;
+}
+
+.editor-tools {
+    background-color: rgb(63, 61, 61);
+    padding: 50px;
+}

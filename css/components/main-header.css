@@ -6,6 +6,7 @@
     width: 50%;
     border-radius: 40px;
     background-color: rgb(120, 228, 213);
+    margin: auto;
 }
 
 .main-header h2 {

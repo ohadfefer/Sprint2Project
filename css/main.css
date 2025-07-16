@@ -2,8 +2,10 @@
 /* COMPONENTS */
 
 @import url(components/main-header.css);
+@import url(components/meme-editor.css);
 
 
 /* BASICS */
 
+@import url(basics/helpers.css);
 @import url(basics/base.css);

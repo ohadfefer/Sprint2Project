@@ -8,31 +8,37 @@
     <title>Meme Generator</title>
 </head>
 <body>
-    <div class="main-container">
-        
-        <header class="main-header">
+    
 
-            <h2>Meme Generator</h2>
-            <nav>
-                <ul>
+    <header class="main-header">
 
-                </ul>
-            </nav>
+        <h2>Meme Generator</h2>
+        <nav>
+            <ul>
 
-        </header>
+            </ul>
+        </nav>
 
-        <section class="meme-gallery-page">
-            <main>
-                <section class="filter-search-section"></section>
-                <section class="memes-grid-container"></section>
-            </main>
-        </section>
+    </header>
 
-        <section class="meme-editor-page hidden"></section>
-        <section class="meme-saved-page hidden"></section>
+    <section class="meme-gallery-page hidden">
+        <main>
+            <section class="filter-search-section"></section>
+            <section class="memes-grid-container"></section>
+        </main>
+    </section>
 
-    </div>
+    <section class="meme-editor-page ">
+        <main>
+            <canvas class="meme-editor-canvas" width="600" height="450">
+            <section class="editor-tools"></section>
+        </main>
+    </section>
+    <section class="meme-saved-page hidden"></section>
+
+    
 
     <script src="js/main.js"></script>
+    <script src="js/memeController.js"></script>
 </body>
 </html>
