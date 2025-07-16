@@ -1,0 +1,13 @@
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border-radius: 40px;
+    background-color: rgb(120, 228, 213);
+}
+
+.main-header h2 {
+    font-family: sans-serif;
+}

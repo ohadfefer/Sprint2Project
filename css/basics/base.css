@@ -1,0 +1,10 @@
+
+body {
+    background-color: rgb(61, 57, 57);
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
