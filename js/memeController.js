@@ -26,3 +26,10 @@ function onTxtInput(txt) {
     renderMeme()
 }
 
+
+function onDownloadMeme(elLink) {
+    const canvas = document.querySelector('.meme-editor-canvas')
+    const dataURL = canvas.toDataURL('image/jpeg')
+    elLink.href = dataURL
+}
+
