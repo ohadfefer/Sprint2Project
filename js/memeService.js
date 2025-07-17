@@ -24,3 +24,28 @@ function getMeme() {
 function setLineTxt(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
+
+
+function addLine() {
+    gMeme.lines.push({
+        txt: 'New Line',
+        size: 20,
+        color: 'white'
+    })
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+function switchLine() {
+    if (!gMeme.lines.length) return
+    gMeme.selectedLineIdx = (gMeme.selectedLineIdx + 1) % gMeme.lines.length
+}
+
+function deleteLine() {
+    if (gMeme.lines.length === 0) return
+
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+
+    if (gMeme.selectedLineIdx >= gMeme.lines.length) {
+        gMeme.selectedLineIdx = gMeme.lines.length - 1
+    }
+}

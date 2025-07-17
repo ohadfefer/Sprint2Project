@@ -19,3 +19,42 @@
     min-width: max-content;
     padding-inline: 50px;
 }
+
+.main-header ul {
+    display: flex;
+    position: static;
+    background-color: inherit;
+    height: 100%;
+    transform: translateX(0);
+    transition: none;
+    flex-direction: row;
+    padding-inline-end: 50px;
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+    min-width: 200px;
+
+}
+
+.main-header h2, .main-header nav, .main-header ul {
+    margin-block: auto;
+}
+
+.main-header button:hover {
+    cursor: pointer;
+}
+
+.main-header .active>button {
+    background: linear-gradient(-86deg, #303030 0, #616666 100%);
+    color: white;
+    border-radius: 20px;
+    cursor: default;
+}
+
+.main-header button {
+    background: 0 0;
+    color: #fff;
+    border: none;
+    font-size: 1em;
+}
+

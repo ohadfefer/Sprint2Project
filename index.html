@@ -14,9 +14,15 @@
         <h2>Meme Generator</h2>
         <nav>
             <ul>
-
+                <li class="gallery-li active"><button class="nav-btn" onclick="onInit()">Gallery</button></li>
+                <li class="saved-li"><button class="nav-btn" onclick="onSavedInit()">Saved</button></li>
+                <li><button class="nav-btn">Randomize</button></li>
             </ul>
         </nav>
+        <select class="toggle-mode" onchange="onToggleMode(this.value)">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+        </select>
 
     </header>
 
@@ -32,7 +38,12 @@
             <canvas class="meme-editor-canvas" width="600" height="450"></canvas>
             <section class="editor-tools">
                 <input type="text" placeholder="Enter text here" oninput="onTxtInput(this.value)">
-                <a href="#" class="btn-download" onclick="onDownloadMeme(this)" download="my-meme.png">Download Meme</a>
+                <div class="input-editors-container">
+                    <button onclick="onSwitchLine()" class="btn-editor btn-switch-inputs">↕</button>
+                    <button onclick="onAddLine()" class="btn-editor btn-add-input">+</button>
+                    <button onclick="onDeleteLine()" class="btn-editor btn-delete-input">🗑</button>
+                </div>
+                <a href="#" class="btn-download" onclick="onDownloadMeme(this)" download="my-meme.png">Download</a>
             </section>
         </main>
     </section>
