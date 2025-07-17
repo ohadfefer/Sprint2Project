@@ -17,9 +17,8 @@
 
 }
 
-
 .meme-editor-canvas {
-    border: 2px solid white;
+    border: none;
 }
 
 .editor-tools {
@@ -49,6 +48,7 @@
     
 }
 */
+
 .editor-tools .btn-switch-inputs {
     background-image: linear-gradient(-38deg, #66c4dc 0%, #0c98bb 100%);
     box-shadow: 1px 5px 0 #048b97, inset 0 5px 0 rgba(255, 255, 255, 0.58);
@@ -62,4 +62,15 @@
 .editor-tools .btn-delete-input {
     background-image: linear-gradient(-38deg, #cf1d37 0%, #f05036 100%);
     box-shadow: 1px 5px 0 #8c0606, inset 0 5px 0 rgba(255, 255, 255, 0.58);
+}
+
+
+.font-editor-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.1em;
+    background-color: #19a59f;
+    border-radius: 15px;
+    padding: 0.83em;
+    width: 100%;
 }

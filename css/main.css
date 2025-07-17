@@ -4,6 +4,7 @@
 @import url(components/main-header.css);
 @import url(components/meme-editor.css);
 @import url(components/meme-gallery.css);
+@import url(components/mq.css);
 
 
 /* BASICS */

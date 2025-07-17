@@ -8,22 +8,29 @@
 </head>
 <body onload="onInit()">
     
-
     <header class="main-header">
-
         <h2>Meme Generator</h2>
-        <nav>
+
+        <nav class="main-nav">
             <ul>
-                <li class="gallery-li active"><button class="nav-btn" onclick="onInit()">Gallery</button></li>
-                <li class="saved-li"><button class="nav-btn" onclick="onSavedInit()">Saved</button></li>
-                <li><button class="nav-btn">Randomize</button></li>
+                <li class="gallery-li active">
+                    <button class="nav-btn" onclick="onInit()">Gallery</button>
+                </li>
+                <li class="saved-li">
+                    <button class="nav-btn" onclick="onSavedInit()">Saved</button>
+                </li>
+                <li>
+                    <button class="nav-btn">Randomize</button>
+                </li>
             </ul>
         </nav>
+
         <select class="toggle-mode" onchange="onToggleMode(this.value)">
             <option value="dark">Dark</option>
             <option value="light">Light</option>
         </select>
 
+        <!---<button class="hamburger" onclick="onToggleMenu()">☰</button>--->
     </header>
 
     <section class="meme-gallery-page">
@@ -39,9 +46,25 @@
             <section class="editor-tools">
                 <input type="text" placeholder="Enter text here" oninput="onTxtInput(this.value)">
                 <div class="input-editors-container">
-                    <button onclick="onSwitchLine()" class="btn-editor btn-switch-inputs">↕</button>
+                    <button onclick="onSwitchLine()" class="btn-editor btn-switch-inputs">⇅</button>
                     <button onclick="onAddLine()" class="btn-editor btn-add-input">+</button>
                     <button onclick="onDeleteLine()" class="btn-editor btn-delete-input">🗑</button>
+                </div>
+                <div class="font-editor-container">
+                    <button class="font-btn" onclick="onUpdateFontSize(1)">A +</button>
+                    <button class="font-btn" onclick="onUpdateFontSize(-1)">A -</button>
+                    <button class="font-btn" onclick="onSetAlign('left')">→</button>
+                    <button class="font-btn" onclick="onSetAlign('center')">⇆</button>
+                    <button class="font-btn" onclick="onSetAlign('right')">←</button>
+                    <select class="font-picker" onchange="onSetFont(this)">
+                        <option value="impact">IMPACT</option>
+                        <option value="arial">ARIAL</option>
+                        <option value="verdana">VERDANA</option>
+                    </select>
+                    <button class="font-btn color-picker">
+                        <input type="color" class="font-btn" oninput="onSetFillColor(this)">
+                    </button>
+
                 </div>
                 <a href="#" class="btn-download" onclick="onDownloadMeme(this)" download="my-meme.png">Download</a>
             </section>

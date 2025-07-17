@@ -9,7 +9,9 @@ var gMeme = {
         {
             txt: 'I sometimes eat Falafel',
             size: 20,
-            color: 'red'
+            color: 'red',
+            font: 'impact',
+            align: 'center'
         }
     ]
 }
@@ -30,7 +32,9 @@ function addLine() {
     gMeme.lines.push({
         txt: 'New Line',
         size: 20,
-        color: 'white'
+        color: 'white',
+        font: 'impact',
+        align: 'center'
     })
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
