@@ -164,3 +164,7 @@
     background-color: #46b98f;
 }
 
+.save-container .btn-save {
+    box-shadow: 1px 6px 0 #165b9c, inset 0 5px 0 #63a8e9;
+    background-color: #2083df;
+}

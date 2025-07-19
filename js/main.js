@@ -43,6 +43,17 @@ function onToggleMenu() {
 }
 
 
+function onToggleMode(mode) {
+  const elBody = document.body
+
+  if (mode === 'light') {
+  elBody.classList.add('light-mode')
+  } else {
+  elBody.classList.remove('light-mode')
+  }
+}
+
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min
 }

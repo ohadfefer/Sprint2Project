@@ -209,3 +209,23 @@ function onShareMeme(elBtn) {
 function onUploadToFB(url) {
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
 }
+
+
+function onSaveMeme() {
+    const canvas = document.querySelector('.meme-editor-canvas')
+    const memeImg = canvas.toDataURL('image/jpeg')
+
+    const savedMemes = JSON.parse(localStorage.getItem('savedMemes') || '[]')
+
+    const savedMeme = {
+        id: Date.now(),
+        imgDataUrl: memeImg,
+        memeData: JSON.parse(JSON.stringify(getMeme())) 
+    }
+
+    savedMemes.push(savedMeme)
+    localStorage.setItem('savedMemes', JSON.stringify(savedMemes))
+
+    alert('Meme saved!')
+}
+
