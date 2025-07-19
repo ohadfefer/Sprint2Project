@@ -13,7 +13,7 @@
 }
 
 .main-header h2 {
-    color: black;
+    color: rgb(0, 0, 0);
     font-family: sans-serif;
     margin-block: auto;
     min-width: max-content;
@@ -42,13 +42,16 @@
 
 .main-header button:hover {
     cursor: pointer;
+    transform: scale(1.03);
+    color: rgba(255, 255, 255, 0.822);
 }
 
-.main-header .active>button {
-    background: linear-gradient(-86deg, #303030 0, #616666 100%);
+.main-header .active > button {
+    background: linear-gradient(-160deg, #ffffff 0, #00000000 30%);
     color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: default;
+    transform: scale(1.03);
 }
 
 .main-header button {

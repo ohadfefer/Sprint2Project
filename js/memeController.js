@@ -12,35 +12,34 @@ function renderMeme() {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 
         meme.lines.forEach((line, idx) => {
-            const x = getXFromAlign(line.align, canvas)
-            const y = 50 + idx * 60
-
             ctx.font = `${line.size}px ${line.font}`
             ctx.fillStyle = line.color
             ctx.textAlign = line.align
-            ctx.fillText(line.txt, x, y)
 
-            // Save position for click detection
+            // Use line.x and line.y (if not set, default to center)
+            if (line.x === undefined) line.x = canvas.width / 2
+            if (line.y === undefined) line.y = 60 + idx * 60
+
+            ctx.fillText(line.txt, line.x, line.y)
+
             const textWidth = ctx.measureText(line.txt).width
-            line.x = x
-            line.y = y
             line.width = textWidth
             line.height = line.size
 
-            // Draw box if selected
+            // Draw rectangle around selected
             if (idx === meme.selectedLineIdx) {
+                let boxX = line.x
+                if (line.align === 'center') boxX = line.x - textWidth / 2
+                if (line.align === 'right') boxX = line.x - textWidth
+
                 ctx.strokeStyle = 'white'
                 ctx.lineWidth = 2
-
-                const boxX = line.align === 'left' ? x :
-                             line.align === 'center' ? x - textWidth / 2 :
-                             x - textWidth
-
-                ctx.strokeRect(boxX - 10, y - line.height, textWidth + 20, line.height + 10)
+                ctx.strokeRect(boxX - 10, line.y - line.height, textWidth + 20, line.height + 10)
             }
         })
     }
 }
+
 
 function getXFromAlign(align, canvas) {
     if (align === 'left') return 10
@@ -137,3 +136,76 @@ function onSetFillColor(elColorInput) {
     renderMeme()
 }
 
+function onAddSticker(stickerTxt) {
+    addLine({
+        txt: stickerTxt,
+        size: 40,
+        color: 'white',
+        font: 'arial',
+        align: 'center'
+    })
+    renderMeme()
+}
+
+
+function onStartDrag(ev) {
+    const { offsetX, offsetY } = ev
+    const lineIdx = getLineClicked(offsetX, offsetY)
+    if (lineIdx !== -1) {
+        const line = getMeme().lines[lineIdx]
+        gIsDragging = true
+        getMeme().selectedLineIdx = lineIdx
+        gDragOffset = {
+            x: offsetX - line.x,
+            y: offsetY - line.y
+        }
+        updateInputField()
+        renderMeme()
+    }
+}
+
+function onDrag(ev) {
+    if (!gIsDragging) return
+    const { offsetX, offsetY } = ev
+    const line = getMeme().lines[getMeme().selectedLineIdx]
+    line.x = offsetX - gDragOffset.x
+    line.y = offsetY - gDragOffset.y
+    renderMeme()
+}
+
+function onEndDrag() {
+    gIsDragging = false
+}
+
+function getLineClicked(x, y) {
+    const meme = getMeme()
+    for (let i = meme.lines.length - 1; i >= 0; i--) {
+        const line = meme.lines[i]
+        const xStart = line.x - line.width / 2 - 10
+        const xEnd = line.x + line.width / 2 + 10
+        const yStart = line.y - line.height
+        const yEnd = line.y + 10
+        if (x >= xStart && x <= xEnd && y >= yStart && y <= yEnd) {
+            return i
+        }
+    }
+    return -1
+}
+
+function onShareMeme(elBtn) {
+    const canvasData = gElCanvas.toDataURL('image/jpeg')
+
+    uploadImg(canvasData, (uploadedImgUrl) => {
+        const encodedUrl = encodeURIComponent(uploadedImgUrl)
+        document.querySelector('.share-container').innerHTML = `
+            <p>Image URL: <a href="${uploadedImgUrl}" target="_blank">${uploadedImgUrl}</a></p>
+            <button class="btn-facebook" onclick="onUploadToFB('${encodedUrl}')">
+                Share on Facebook
+            </button>
+        `
+    })
+}
+
+function onUploadToFB(url) {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&t=${url}`)
+}

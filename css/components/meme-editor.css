@@ -18,7 +18,7 @@
 }
 
 .meme-editor-canvas {
-    border: none;
+    border-radius: 10px;
 }
 
 .editor-tools {
@@ -34,6 +34,15 @@
     border-radius: 1.875em;
 }
 
+.editor-tools .input-text{
+    font-size: 1em;
+    background-color: #ebeef3;
+    border-radius: 1.75rem;
+    width: 80%;
+    padding-inline-start: 50px;
+    border: none;
+}
+
 .editor-tools .btn-editor {
     color: white;
     border: none;
@@ -41,6 +50,7 @@
     width: 3.5rem;
     height: 3.5rem;
     font-size: 1em;
+    cursor: pointer;
 }
 
 /*.input-editors-container {
@@ -68,9 +78,89 @@
 .font-editor-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 0.1em;
+    gap: 1.5rem;
     background-color: #19a59f;
     border-radius: 15px;
-    padding: 0.83em;
+    padding: 0.8em;
     width: 100%;
 }
+
+.editor-tools .font-btn {
+    font-size: 1em;
+    aspect-ratio: 1;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.font-editor-container select {
+    grid-column: 1 / -3;
+    justify-self: normal;
+    font-size: 1em;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.font-editor-container button:hover {
+    background-color: #ffffffb2;
+}
+
+.font-editor-container select:hover {
+    background-color: #ffffffb2;
+}
+
+
+.stickers-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #e4a92a;
+}
+
+.stickers-container .sticker-btn {
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255)
+    
+}
+
+.stickers-container .sticker-btn:hover {
+    cursor: pointer;
+    background-color: #ffffffb2;
+}
+
+
+.save-container {
+    display: flex;
+    gap: 5px;
+}
+
+.save-container .btn {
+    margin-inline: 5px;
+    padding-inline: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    text-decoration: none;
+    color: white;
+}
+
+.save-container .btn-download {
+    box-shadow: 1px 6px 0 #6b169c, inset 0 5px 0 #b863e9;
+    background-color: #9920df;
+}
+
+.save-container .btn-share {
+    box-shadow: 1px 6px 0 #318164, inset 0 5px 0 #7eceb0;
+    background-color: #46b98f;
+}
+

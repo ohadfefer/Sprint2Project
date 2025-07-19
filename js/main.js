@@ -1,13 +1,38 @@
 'use strict'
 
 
-function onInit() {
-    renderGallery()
-    const canvas = document.querySelector('.meme-editor-canvas')
-    canvas.addEventListener('click', onCanvasClick)
+var gElCanvas
+var gCtx
+var gIsDragging = false
+var gDragOffset = { x: 0, y: 0 }
 
-    document.querySelector('.meme-editor-page').classList.add('hidden')
-    document.querySelector('.meme-gallery-page').classList.remove('hidden')
+
+function onInit() {
+
+  gElCanvas = document.querySelector('.meme-editor-canvas')
+  gCtx = gElCanvas.getContext('2d')
+
+  renderGallery()
+  const canvas = document.querySelector('.meme-editor-canvas')
+  canvas.addEventListener('click', onCanvasClick)
+  canvas.addEventListener('mousedown', onStartDrag)
+  canvas.addEventListener('mousemove', onDrag)
+  canvas.addEventListener('mouseup', onEndDrag)
+  canvas.addEventListener('mouseleave', onEndDrag)
+
+
+
+  /* show and hide page */
+
+  document.querySelector('.meme-editor-page').classList.add('hidden')
+  document.querySelector('.meme-saved-page').classList.add('hidden')
+  document.querySelector('.meme-gallery-page').classList.remove('hidden')
+
+  /* add 'active' class when btns in main header are clicked */
+
+  document.querySelector('.main-nav .gallery-li').classList.add('active')
+  document.querySelector('.main-nav .saved-li').classList.remove('active')
+  document.querySelector('.main-nav .Randomize-li').classList.remove('active')
 }
 
 function onToggleMenu() {
@@ -18,3 +43,6 @@ function onToggleMenu() {
 }
 
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min
+}

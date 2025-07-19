@@ -19,8 +19,8 @@
                 <li class="saved-li">
                     <button class="nav-btn" onclick="onSavedInit()">Saved</button>
                 </li>
-                <li>
-                    <button class="nav-btn">Randomize</button>
+                <li class="Randomize-li">
+                    <button class="nav-btn" onclick="onRandomizeInit()">Randomize</button>
                 </li>
             </ul>
         </nav>
@@ -30,8 +30,16 @@
             <option value="light">Light</option>
         </select>
 
-        <!---<button class="hamburger" onclick="onToggleMenu()">☰</button>--->
+        <button class="hamburger" onclick="onToggleMenu()">☰</button>
     </header>
+
+    <nav class="side-nav hidden">
+        <ul>
+            <li><button class="nav-btn" onclick="onInit(); onToggleMenu()">Gallery</button></li>
+            <li><button class="nav-btn" onclick="onSavedInit(); onToggleMenu()">Saved</button></li>
+            <li><button class="nav-btn">Randomize</button></li>
+        </ul>
+    </nav>
 
     <section class="meme-gallery-page">
         <main>
@@ -44,7 +52,7 @@
         <main>
             <canvas class="meme-editor-canvas" width="600" height="450"></canvas>
             <section class="editor-tools">
-                <input type="text" placeholder="Enter text here" oninput="onTxtInput(this.value)">
+                <input class="input-text" type="text" placeholder="Enter text here" oninput="onTxtInput(this.value)">
                 <div class="input-editors-container">
                     <button onclick="onSwitchLine()" class="btn-editor btn-switch-inputs">⇅</button>
                     <button onclick="onAddLine()" class="btn-editor btn-add-input">+</button>
@@ -64,12 +72,25 @@
                     <button class="font-btn color-picker">
                         <input type="color" class="font-btn" oninput="onSetFillColor(this)">
                     </button>
-
                 </div>
-                <a href="#" class="btn-download" onclick="onDownloadMeme(this)" download="my-meme.png">Download</a>
+
+                <div class="stickers-container">
+                    <button class="sticker-btn" onclick="onAddSticker('😎')">😎</button>
+                    <button class="sticker-btn" onclick="onAddSticker('👙')">👙</button>
+                    <button class="sticker-btn" onclick="onAddSticker('👓')">👓</button>
+                    <button class="sticker-btn" onclick="onAddSticker('👀')">👀</button>
+                    <button class="sticker-btn" onclick="onAddSticker('✨')">✨</button>
+                </div>
+                <div class="save-container">
+                    <a href="#" class="btn btn-download" onclick="onDownloadMeme(this)" download="my-meme.png">Download</a>
+                    <a href="#" class="btn btn-share" onclick="onShareMeme(this)">Share</a>
+                    <div class="share-container"></div>
+                </div>
+                
             </section>
         </main>
     </section>
+
     <section class="meme-saved-page hidden"></section>
 
     

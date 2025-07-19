@@ -28,16 +28,23 @@ function setLineTxt(txt) {
 }
 
 
-function addLine() {
-    gMeme.lines.push({
-        txt: 'New Line',
-        size: 20,
-        color: 'white',
-        font: 'impact',
-        align: 'center'
-    })
+function addLine(lineData = {}) {
+    const canvas = document.querySelector('.meme-editor-canvas')
+
+    const newLine = {
+        txt: lineData.txt || 'New Line',
+        size: lineData.size || 20,
+        color: lineData.color || 'white',
+        font: lineData.font || 'impact',
+        align: lineData.align || 'center',
+        x: lineData.x || canvas.width / 2,
+        y: lineData.y || canvas.height / 2
+    }
+
+    gMeme.lines.push(newLine)
     gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
+
 
 function switchLine() {
     if (!gMeme.lines.length) return
@@ -52,4 +59,14 @@ function deleteLine() {
     if (gMeme.selectedLineIdx >= gMeme.lines.length) {
         gMeme.selectedLineIdx = gMeme.lines.length - 1
     }
+}
+
+function getRandomText() {
+    const texts = [
+        'When you code at 3AM',
+        'When you finally understand something:',
+        'Learning Python after JS be like:',
+        'Learning C after JS be like:'
+    ]
+    return texts[getRandomInt(0, texts.length)]
 }
