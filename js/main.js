@@ -57,3 +57,12 @@ function onToggleMode(mode) {
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min
 }
+
+function saveToStorage(key, val) {
+  localStorage.setItem(key, JSON.stringify(val))
+}
+
+function loadFromStorage(key) {
+  return JSON.parse(localStorage.getItem(key))
+}
+

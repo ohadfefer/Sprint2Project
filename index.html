@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/05c3dc5946.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/main.css">
     <title>Meme Generator</title>
 </head>
@@ -26,8 +27,8 @@
         </nav>
 
         <select class="toggle-mode" onchange="onToggleMode(this.value)">
-            <option value="dark">Dark</option>
-            <option value="light">Light</option>
+            <option value="dark">🌙</option>
+            <option value="light">🌞</option>
         </select>
 
         <button class="hamburger" onclick="onToggleMenu()">☰</button>
@@ -37,16 +38,14 @@
         <ul>
             <li><button class="nav-btn" onclick="onInit(); onToggleMenu()">Gallery</button></li>
             <li><button class="nav-btn" onclick="onSavedInit(); onToggleMenu()">Saved</button></li>
-            <li><button class="nav-btn">Randomize</button></li>
+            <li><button class="nav-btn" onclick="onRandomizeInit()">Randomize</button></li>
         </ul>
     </nav>
 
     <section class="meme-gallery-page">
         <main>
             <section class="filter-search-section"></section>
-            <section class="memes-grid-container">
-            </section>
-            
+            <section class="memes-grid-container"></section>
         </main>
     </section>
 
@@ -72,8 +71,12 @@
                         <option value="verdana">VERDANA</option>
                     </select>
                     <button class="font-btn color-picker">
-                        <input type="color" class="font-btn" oninput="onSetFillColor(this)">
+                        <div class="color-picker-wrapper">
+                            <i class="fa-solid fa-fill"></i>
+                            <input type="color" oninput="onSetFillColor(this)">
+                        </div>
                     </button>
+                    
                 </div>
 
                 <div class="stickers-container">
@@ -85,7 +88,7 @@
                 </div>
                 <div class="save-container">
                     <a href="" class="btn btn-save" onclick="onSaveMeme()">Save</a>
-                    <a href="#" class="btn btn-download" onclick="onDownloadMeme(this)" download="my-meme.png">Download</a>
+                    <a href="#" class="btn btn-download" onclick="onDownloadMeme(); return false;">Download</a>
                     <a href="#" class="btn btn-share" onclick="onShareMeme(this)">Share</a>
                     <div class="share-container"></div>
                 </div>

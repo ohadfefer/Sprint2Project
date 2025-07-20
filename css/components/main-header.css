@@ -61,3 +61,12 @@
     font-size: 1em;
 }
 
+.toggle-mode {
+    appearance: none;
+    font-size: 1.3rem;
+    background-color: rgb(77, 76, 76);
+}
+
+.toggle-mode:hover {
+    cursor: pointer;
+}

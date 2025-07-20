@@ -1,22 +1,24 @@
 'use strict'
 
-function renderMeme() {
+const canvas = document.querySelector('.meme-editor-canvas')
+
+function renderMeme({ shouldDrawFrame = true, onRenderDone } = {}) {
     const meme = getMeme()
     const img = new Image()
-    img.src = `img/${meme.selectedImgId}.jpg`
+    img.src = meme.uploadedImg ? meme.uploadedImg.src : `img/${meme.selectedImgId}.jpg`
 
-    const canvas = document.querySelector('.meme-editor-canvas')
+    
     const ctx = canvas.getContext('2d')
 
     img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 
         meme.lines.forEach((line, idx) => {
-            ctx.font = `${line.size}px ${line.font}`
-            ctx.fillStyle = line.color
-            ctx.textAlign = line.align
+            ctx.font = `${line.size}px ${line.font || 'impact'}`
+            ctx.fillStyle = line.color || 'white'
+            ctx.textAlign = line.align || 'center'
 
-            // Use line.x and line.y (if not set, default to center)
             if (line.x === undefined) line.x = canvas.width / 2
             if (line.y === undefined) line.y = 60 + idx * 60
 
@@ -26,8 +28,7 @@ function renderMeme() {
             line.width = textWidth
             line.height = line.size
 
-            // Draw rectangle around selected
-            if (idx === meme.selectedLineIdx) {
+            if (shouldDrawFrame && idx === meme.selectedLineIdx) {
                 let boxX = line.x
                 if (line.align === 'center') boxX = line.x - textWidth / 2
                 if (line.align === 'right') boxX = line.x - textWidth
@@ -37,8 +38,12 @@ function renderMeme() {
                 ctx.strokeRect(boxX - 10, line.y - line.height, textWidth + 20, line.height + 10)
             }
         })
+
+        if (typeof onRenderDone === 'function') onRenderDone()
     }
 }
+
+
 
 
 function getXFromAlign(align, canvas) {
@@ -54,11 +59,28 @@ function onTxtInput(txt) {
 }
 
 
-function onDownloadMeme(elLink) {
-    const canvas = document.querySelector('.meme-editor-canvas')
-    const dataURL = canvas.toDataURL('image/jpeg')
-    elLink.href = dataURL
+function onDownloadMeme() {
+    renderMeme({
+        shouldDrawFrame: false,
+        onRenderDone: () => {
+            const imgContent = canvas.toDataURL('image/jpeg')
+
+            const tempLink = document.createElement('a')
+            tempLink.href = imgContent
+            tempLink.download = `meme-${Date.now()}.jpg`
+            document.body.appendChild(tempLink)
+            tempLink.click()
+            document.body.removeChild(tempLink)
+
+            renderMeme()
+        }
+    })
 }
+
+
+
+
+
 
 
 function onAddLine() {
@@ -87,7 +109,7 @@ function updateInputField() {
 
 
 function onCanvasClick(ev) {
-    const canvas = document.querySelector('.meme-editor-canvas')
+
     const rect = canvas.getBoundingClientRect()
     const clickX = ev.clientX - rect.left
     const clickY = ev.clientY - rect.top
@@ -212,20 +234,26 @@ function onUploadToFB(url) {
 
 
 function onSaveMeme() {
-    const canvas = document.querySelector('.meme-editor-canvas')
-    const memeImg = canvas.toDataURL('image/jpeg')
+    renderMeme({
+        shouldDrawFrame: false,
+        onRenderDone: () => {
+            const memeImg = canvas.toDataURL('image/jpeg')
+            const savedMemes = loadFromStorage('savedMemes') || []
 
-    const savedMemes = JSON.parse(localStorage.getItem('savedMemes') || '[]')
+            const savedMeme = {
+                id: Date.now(),
+                imgDataUrl: memeImg,
+                memeData: JSON.parse(JSON.stringify(getMeme()))
+            }
 
-    const savedMeme = {
-        id: Date.now(),
-        imgDataUrl: memeImg,
-        memeData: JSON.parse(JSON.stringify(getMeme())) 
-    }
+            savedMemes.push(savedMeme)
+            saveToStorage('savedMemes', savedMemes)
 
-    savedMemes.push(savedMeme)
-    localStorage.setItem('savedMemes', JSON.stringify(savedMemes))
-
-    alert('Meme saved!')
+            renderMeme() 
+            alert('Meme saved!')
+        }
+    })
 }
+
+
 

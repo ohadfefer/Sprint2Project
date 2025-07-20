@@ -127,13 +127,13 @@
     font-size: 1em;
     border: none;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255)
-    
+    background-color: #e4a92a;
+    transition: 0.6s;
 }
 
 .stickers-container .sticker-btn:hover {
     cursor: pointer;
-    background-color: #ffffffb2;
+    scale: 1.3;
 }
 
 
@@ -167,4 +167,30 @@
 .save-container .btn-save {
     box-shadow: 1px 6px 0 #165b9c, inset 0 5px 0 #63a8e9;
     background-color: #2083df;
+}
+
+.color-picker-wrapper {
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.color-picker-wrapper i {
+    font-size: 1.5rem;
+    pointer-events: none; 
+}
+
+.color-picker-wrapper input[type="color"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    border: none;
 }
